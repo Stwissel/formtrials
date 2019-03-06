@@ -12,11 +12,12 @@
         "test:unit:debug": "lwc-jest --debug",
         "prettier": "prettier --write '**/*.{cmp,component,css,html,js,json,md,page,yaml,yml}'",
         "prettier:verify": "prettier --list-different '**/*.{html,js,json,yaml,yml,md,cmp,page,component}'",
-        "postinstall": "node bin/check-version.js"
+        "postinstall": "node bin/check-version.js",
+        "push": "sfdx force:source:deploy -p force-app/main/default/lwc"
     },
     "repository": {
         "type": "git",
-        "url": "git://github.com/stwissel/formtrials.git"
+        "url": "git@github.com:Stwissel/formtrials.git"
     },
     "keywords": [
         "LWC",
