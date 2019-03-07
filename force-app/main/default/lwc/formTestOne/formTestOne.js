@@ -9,24 +9,38 @@ export default class FormTestOne extends LightningElement {
     @api objectApiName;
     @api color;
 
+    initialLoadDone = false;
+
     color1Field = COLOR1_FIELD;
     color2Field = COLOR2_FIELD;
     nameField = NAME_FIELD;
     summaryField = SUMMARY_FIELD;
 
     handleLoad(event) {
-        /* eslint-disable no-debugger */
-        debugger;
         /* eslint-disable no-console */
         console.log('data loaded');
         console.log(event.detail.objectInfos);
-        this.updateFieldValue('Text_Color__c', 'Outside supplied');
+        if (!this.initialLoadDone) {
+            this.updateFieldValue('Text_Color__c', 'Pink we all love Pink!');
+        }
     }
 
     updateFieldValue(fieldName, fieldValue) {
-        let querySelector = 'lightning-input-field[name="' + fieldName + '"]';
-        let ele = this.template.querySelector(querySelector);
-        ele.value = fieldValue;
+        let querySelector = 'lightning-input-field';
+        let allElements = this.template.querySelectorAll(querySelector);
+        /* eslint-disable no-debugger */
+        // debugger;
+        if (allElements) {
+            allElements.forEach(ele => {
+                if (ele.fieldName === fieldName) {
+                    ele.value = fieldValue;
+                }
+            });
+        } else {
+            /* eslint-disable no-console */
+            console.log("Can't get to " + fieldName);
+        }
+        this.initialLoadDone = true;
     }
 
     handleRecordCreated(event) {
